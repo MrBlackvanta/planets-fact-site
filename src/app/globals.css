@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@source not "../../*.md";
+@source not "../**/*.test.ts";
+@source not "../**/*.test.tsx";
+@source not "../test";
+
+@theme {
+  --font-display: var(--font-antonio), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-league-spartan), ui-sans-serif, system-ui, sans-serif;
+
+  --color-page: #070724;
+  --color-ink: #ffffff;
+  --color-dim: rgb(255 255 255 / 0.75);
+  --color-muted: rgb(255 255 255 / 0.55);
+  --color-line: rgb(255 255 255 / 0.2);
+  --color-rule: rgb(255 255 255 / 0.1);
+  --color-hover: #313148;
+
+  --color-accent: #419ebb;
+  --color-accent-ink: #070724;
+  --color-sphere: #def4fc;
+
+  --container-content: 69.375rem;
+
+  --text-h1: 2.5rem;
+  --text-h1--line-height: 3.25rem;
+  --text-h1--font-weight: 500;
+  --text-h1-md: 3rem;
+  --text-h1-md--line-height: 3.875rem;
+  --text-h1-md--font-weight: 500;
+  --text-h1-lg: 5rem;
+  --text-h1-lg--line-height: 6.4375rem;
+  --text-h1-lg--font-weight: 500;
+
+  --text-h2: 1.25rem;
+  --text-h2--line-height: 1.625rem;
+  --text-h2--letter-spacing: -0.0375em;
+  --text-h2--font-weight: 500;
+  --text-h2-md: 1.5rem;
+  --text-h2-md--line-height: 1.9375rem;
+  --text-h2-md--letter-spacing: -0.0375em;
+  --text-h2-md--font-weight: 500;
+  --text-h2-lg: 2.5rem;
+  --text-h2-lg--line-height: 3.25rem;
+  --text-h2-lg--letter-spacing: -0.0375em;
+  --text-h2-lg--font-weight: 500;
+
+  --text-h3: 0.5625rem;
+  --text-h3--line-height: 1.5625rem;
+  --text-h3--letter-spacing: 0.2143em;
+  --text-h3--font-weight: 700;
+  --text-h3-lg: 0.75rem;
+  --text-h3-lg--line-height: 1.5625rem;
+  --text-h3-lg--letter-spacing: 0.2143em;
+  --text-h3-lg--font-weight: 700;
+
+  --text-h4: 0.5rem;
+  --text-h4--line-height: 1rem;
+  --text-h4--letter-spacing: 0.0909em;
+  --text-h4--font-weight: 700;
+  --text-h4-lg: 0.6875rem;
+  --text-h4-lg--line-height: 1.5625rem;
+  --text-h4-lg--letter-spacing: 0.0909em;
+  --text-h4-lg--font-weight: 700;
+
+  --text-wordmark: 1.75rem;
+  --text-wordmark--line-height: 2.25rem;
+  --text-wordmark--letter-spacing: -0.0375em;
+  --text-wordmark--font-weight: 500;
+
+  --text-menu: 0.9375rem;
+  --text-menu--line-height: 1.5625rem;
+  --text-menu--letter-spacing: 0.0909em;
+  --text-menu--font-weight: 700;
+
+  --text-body: 0.6875rem;
+  --text-body--line-height: 1.375rem;
+  --text-body--font-weight: 400;
+  --text-body-lg: 0.875rem;
+  --text-body-lg--line-height: 1.5625rem;
+  --text-body-lg--font-weight: 400;
+
+  --text-source: 0.75rem;
+  --text-source--line-height: 1.5625rem;
+  --text-source--font-weight: 400;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    @apply bg-page text-ink font-sans;
+  }
+
+  button:not(:disabled) {
+    @apply cursor-pointer;
+  }
+
+  :focus-visible {
+    @apply outline-ink outline-2 outline-offset-2;
+  }
+
+  [data-planet="mercury"] {
+    --color-accent: #419ebb;
+    --color-accent-ink: #070724;
+    --color-sphere: #def4fc;
+  }
+
+  [data-planet="venus"] {
+    --color-accent: #eda249;
+    --color-accent-ink: #070724;
+    --color-sphere: #f7cc7f;
+  }
+
+  [data-planet="earth"] {
+    --color-accent: #7235d6;
+    --color-accent-ink: #ffffff;
+    --color-sphere: #545bfe;
+  }
+
+  [data-planet="mars"] {
+    --color-accent: #cf492f;
+    --color-accent-ink: #ffffff;
+    --color-sphere: #ff6a45;
+  }
+
+  [data-planet="jupiter"] {
+    --color-accent: #d83a34;
+    --color-accent-ink: #ffffff;
+    --color-sphere: #ecad7a;
+  }
+
+  [data-planet="saturn"] {
+    --color-accent: #c9501f;
+    --color-accent-ink: #ffffff;
+    --color-sphere: #fccb6b;
+  }
+
+  [data-planet="uranus"] {
+    --color-accent: #1ec1a2;
+    --color-accent-ink: #070724;
+    --color-sphere: #65f0d5;
+  }
+
+  [data-planet="neptune"] {
+    --color-accent: #2d68f0;
+    --color-accent-ink: #ffffff;
+    --color-sphere: #497efa;
+  }
+}
