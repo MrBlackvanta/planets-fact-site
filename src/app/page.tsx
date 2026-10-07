@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="text-h1-md text-h1-lg md:text-h1-md lg:text-h1-lg lg:text-h1 md:text-body lg:text-body-lg text-body-lg">
+    <main className="grid min-h-dvh place-items-center">
       <h1>{SITE_NAME}</h1>
     </main>
   );
