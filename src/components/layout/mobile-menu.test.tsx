@@ -75,6 +75,39 @@ describe("MobileMenu", () => {
     expect(document.body.style.position).toBe("");
   });
 
+  it("takes the page behind the panel out of the tab order while it is open", async () => {
+    const user = userEvent.setup();
+    render(
+      <div>
+        <header>
+          <MobileMenu>
+            <a href="#venus">Venus</a>
+          </MobileMenu>
+        </header>
+        <main>
+          <a href="#source">Source</a>
+        </main>
+        <div role="status" data-testid="announcer">
+          Mars
+        </div>
+      </div>,
+    );
+
+    const button = screen.getByRole("button", { name: "Menu" });
+    const page = screen.getByRole("main");
+    const announcer = screen.getByTestId("announcer");
+
+    expect(page).not.toHaveAttribute("inert");
+
+    await user.click(button);
+    expect(page).toHaveAttribute("inert");
+    expect(button).not.toHaveAttribute("inert");
+    expect(announcer).not.toHaveAttribute("inert");
+
+    await user.click(button);
+    expect(page).not.toHaveAttribute("inert");
+  });
+
   it("closes itself when the viewport grows past the breakpoint", async () => {
     const user = userEvent.setup();
     const button = renderMenu();

@@ -3,9 +3,30 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import HamburgerIcon from "../icons/hamburger-icon";
 
+const FOCUSABLE = "a[href], button, input, select, textarea, [tabindex]";
+
+function focusableRegionsBeside(element: HTMLElement | null) {
+  const beside: HTMLElement[] = [];
+
+  for (let node = element; node && node !== document.body;) {
+    const parent = node.parentElement;
+    if (!parent) break;
+    for (const sibling of parent.children) {
+      if (sibling === node || !(sibling instanceof HTMLElement)) continue;
+      if (sibling.matches(FOCUSABLE) || sibling.querySelector(FOCUSABLE)) {
+        beside.push(sibling);
+      }
+    }
+    node = parent;
+  }
+
+  return beside;
+}
+
 export default function MobileMenu({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -15,6 +36,9 @@ export default function MobileMenu({ children }: { children: ReactNode }) {
     style.position = "fixed";
     style.insetInline = "0";
     style.top = `${-scrollY}px`;
+
+    const covered = focusableRegionsBeside(rootRef.current);
+    for (const element of covered) element.toggleAttribute("inert", true);
 
     const wide = window.matchMedia("(min-width: 48rem)");
     const closeOnWide = () => {
@@ -32,6 +56,7 @@ export default function MobileMenu({ children }: { children: ReactNode }) {
     return () => {
       wide.removeEventListener("change", closeOnWide);
       document.removeEventListener("keydown", closeOnEscape);
+      for (const element of covered) element.removeAttribute("inert");
       style.position = "";
       style.insetInline = "";
       style.top = "";
@@ -40,7 +65,7 @@ export default function MobileMenu({ children }: { children: ReactNode }) {
   }, [open]);
 
   return (
-    <div className="flex md:hidden">
+    <div ref={rootRef} className="flex md:hidden">
       <button
         ref={buttonRef}
         type="button"

@@ -13,7 +13,7 @@ export default function PlanetFacts({ planet }: { planet: Planet }) {
       {facts.map(({ label, value }) => (
         <div
           key={label}
-          className="border-line flex h-12 items-center justify-between border px-6 md:block md:h-22 md:px-3.75 md:pt-4 lg:h-32 lg:px-5.75 lg:pt-5"
+          className="border-line flex h-12 items-center justify-between border px-5.75 md:block md:h-22 md:px-3.5 md:pt-3.75 lg:h-32 lg:px-5.5 lg:pt-4.75"
         >
           <dt className="text-h4 lg:text-h4-lg text-muted uppercase">
             {label}

@@ -19,7 +19,7 @@ export const openGraphBase = {
       url: "/opengraph-image.jpg",
       width: 1200,
       height: 630,
-      alt: "The Planets wordmark beside Earth on a star-flecked navy ground.",
+      alt: "The Planets wordmark beside the site's Mercury page on a star-flecked navy ground.",
     },
   ],
 } satisfies Metadata["openGraph"];
