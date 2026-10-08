@@ -1,4 +1,4 @@
-import Signature from "@/components/layout/signature";
+import { Signature } from "@/components/layout";
 import {
   openGraphBase,
   SITE_DESCRIPTION,

@@ -96,6 +96,8 @@
 
   body {
     @apply bg-page text-ink font-sans;
+    background-image: url("../assets/background-stars.svg");
+    background-position: center top;
   }
 
   button:not(:disabled) {

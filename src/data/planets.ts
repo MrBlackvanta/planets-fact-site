@@ -70,13 +70,13 @@ export const planets: readonly Planet[] = [
     },
     structure: {
       content:
-        "Mercury appears to have a solid silicate crust and mantle overlying a solid, iron sulfide outer core layer, a deeper liquid core layer, and a solid inner core. The planet's density is the second highest in the Solar System at 5.427 g/cm3 , only slightly less than Earth's density.",
+        "Mercury appears to have a solid silicate crust and mantle overlying a solid, iron sulfide outer core layer, a deeper liquid core layer, and a solid inner core. The planet's density is the second highest in the Solar System at 5.427 g/cm3, only slightly less than Earth's density.",
       source:
         "https://en.wikipedia.org/wiki/Mercury_(planet)#Internal_structure",
     },
     geology: {
       content:
-        "Mercury's surface is similar in appearance to that of the Moon, showing extensive mare-like plains and heavy cratering, indicating that it has been geologically inactive for billions of years. It is more heterogeneous than either Mars's or the Moon’s.",
+        "Mercury's surface is similar in appearance to that of the Moon, showing extensive mare-like plains and heavy cratering, indicating that it has been geologically inactive for billions of years. It is more heterogeneous than either Mars's or the Moon's.",
       source: "https://en.wikipedia.org/wiki/Mercury_(planet)#Surface_geology",
     },
     rotation: "58.6 Days",
@@ -288,8 +288,14 @@ export const planets: readonly Planet[] = [
   },
 ];
 
-export const ROOT_PLANET: PlanetSlug = "mercury";
+export const [rootPlanet] = planets;
+
+export const ROOT_PLANET = rootPlanet.slug;
 
 export function planetPath(slug: PlanetSlug): string {
   return slug === ROOT_PLANET ? "/" : `/${slug}`;
+}
+
+export function findPlanet(slug: string): Planet | undefined {
+  return planets.find((planet) => planet.slug === slug);
 }
