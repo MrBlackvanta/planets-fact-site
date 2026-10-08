@@ -15,11 +15,17 @@ export default function PlanetTopics({
   panels,
 }: PlanetTopicsProps) {
   const [topic, setTopic] = useState<PlanetTopic>(rootTopic.id);
+  const [hasSwitched, setHasSwitched] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+
+  function choose(id: PlanetTopic) {
+    setTopic(id);
+    setHasSwitched(true);
+  }
 
   function select(position: number) {
     const { id } = topics[(position + topics.length) % topics.length];
-    setTopic(id);
+    choose(id);
     listRef.current?.querySelector<HTMLButtonElement>(`#tab-${id}`)?.focus();
   }
 
@@ -69,24 +75,29 @@ export default function PlanetTopics({
               aria-selected={selected}
               aria-controls={`panel-${id}`}
               tabIndex={selected ? 0 : -1}
-              onClick={() => setTopic(id)}
-              className={`text-h3 lg:text-h3-lg relative flex w-20 items-center justify-center uppercase md:h-10 md:w-full md:justify-start md:border md:pl-5 lg:h-12 lg:pl-7 ${
+              onClick={() => choose(id)}
+              className={`text-h3 lg:text-h3-lg relative flex w-20 items-center justify-center uppercase transition-colors duration-300 motion-reduce:transition-none md:h-10 md:w-full md:justify-start md:border md:pl-5 lg:h-12 lg:pl-7 ${
                 selected
-                  ? "text-ink md:border-accent md:bg-accent md:text-accent-ink"
+                  ? "text-ink md:border-accent md:text-accent-ink"
                   : "text-muted md:border-line md:text-ink md:hover:bg-hover"
               }`}
             >
               <span
                 aria-hidden="true"
-                className={`hidden md:block md:w-7.5 lg:w-11.5 ${selected ? "" : "opacity-55"}`}
+                className={`bg-accent absolute inset-x-0 -bottom-px h-1 origin-left transition-[scale,opacity] duration-300 motion-reduce:transition-none md:top-0 md:bottom-0 md:h-auto ${
+                  selected
+                    ? "scale-x-100"
+                    : "scale-x-0 md:scale-x-100 md:opacity-0"
+                }`}
+              />
+              <span
+                aria-hidden="true"
+                className={`relative hidden md:block md:w-7.5 lg:w-11.5 ${selected ? "" : "opacity-55"}`}
               >
                 {String(position + 1).padStart(2, "0")}
               </span>
-              <span className="md:hidden">{shortLabel}</span>
-              <span className="max-md:hidden">{label}</span>
-              {selected && (
-                <span className="bg-accent absolute inset-x-0 -bottom-px h-1 md:hidden" />
-              )}
+              <span className="relative md:hidden">{shortLabel}</span>
+              <span className="relative max-md:hidden">{label}</span>
             </button>
           );
         })}
@@ -110,6 +121,11 @@ export default function PlanetTopics({
             role="tabpanel"
             aria-labelledby={`tab-${id}`}
             hidden={id !== topic}
+            className={
+              hasSwitched
+                ? "animate-topic-in motion-reduce:animate-none"
+                : undefined
+            }
           >
             {panels[id]}
           </div>

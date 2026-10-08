@@ -22,7 +22,7 @@ const variants: Record<
 
 type NavLinksProps = {
   variant: NavVariant;
-  current: PlanetSlug;
+  current?: PlanetSlug;
 };
 
 export default function NavLinks({ variant, current }: NavLinksProps) {

@@ -100,4 +100,15 @@ describe("PlanetTopics", () => {
       screen.getByRole("heading", { level: 1, name: "Earth" }),
     ).toBeInTheDocument();
   });
+
+  it("holds the opening panel still and animates only a switch", async () => {
+    const tabs = renderTopics();
+    const panel = () => screen.getByRole("tabpanel");
+
+    expect(panel().className).not.toContain("animate-topic-in");
+
+    await userEvent.click(tabs[1]);
+
+    expect(panel().className).toContain("animate-topic-in");
+  });
 });

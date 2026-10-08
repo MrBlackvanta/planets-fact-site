@@ -83,6 +83,15 @@
   --text-source: 0.75rem;
   --text-source--line-height: 1.5625rem;
   --text-source--font-weight: 400;
+
+  --animate-topic-in: topic-in 400ms ease-out;
+
+  @keyframes topic-in {
+    from {
+      opacity: 0;
+      translate: 0 0.5rem;
+    }
+  }
 }
 
 @layer base {
@@ -174,4 +183,24 @@
     top: 261px;
     scale: 100%;
   }
+}
+
+::view-transition-group(root) {
+  animation-duration: 300ms;
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(sphere-body),
+::view-transition-group(sphere-internal),
+::view-transition-group(sphere-geology) {
+  animation-duration: 600ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
