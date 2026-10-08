@@ -12,7 +12,7 @@ function nextStaticImages(): Plugin {
       const [file] = id.split("?");
       if (!file || !STATIC_IMAGE.test(file)) return null;
       const src = `/_next/static/media/${basename(file)}`;
-      return `export default { src: ${JSON.stringify(src)} };`;
+      return `export default { src: ${JSON.stringify(src)}, width: 1, height: 1 };`;
     },
   };
 }

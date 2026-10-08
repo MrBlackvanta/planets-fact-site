@@ -20,7 +20,7 @@
   --color-accent-ink: #070724;
   --color-sphere: #def4fc;
 
-  --container-content: 69.375rem;
+  --container-shell: 74.375rem;
 
   --text-h1: 2.5rem;
   --text-h1--line-height: 3.25rem;
@@ -154,5 +154,24 @@
     --color-accent: #2d68f0;
     --color-accent-ink: #ffffff;
     --color-sphere: #497efa;
+  }
+}
+
+@utility v-sphere-anchor {
+  position: absolute;
+  top: 151px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  scale: 38.44%;
+
+  @variant md {
+    top: 238.5px;
+    scale: 63.36%;
+  }
+
+  @variant lg {
+    top: 261px;
+    scale: 100%;
   }
 }
